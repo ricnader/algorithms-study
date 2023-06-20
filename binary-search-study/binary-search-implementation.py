@@ -8,14 +8,13 @@ def regularsearch(nRange,choice):
   
   for element in nRange:
     if (choice == element):
-      print(f"choice is {choice}")
-      end = time.time()      
-      print(f"elapsed time: {end - start}")
+      print(f"choice is {choice}")                 
       return 
         
-  print("Not found")     
-
-
+  print("Not found") 
+  
+  end = time.time()     
+  print(f"elapsed time: {end - start}")
 
 
 
@@ -24,21 +23,25 @@ def binarySearch(nRange,choice):
   
   low = 0
   high = len(nRange)
-  medium = len(nRange)/2
+  medium = round(len(nRange)/2)
+  teste = nRange[medium]
+  # for index, currentValue in enumerate(nRange):
+          
+  while(nRange[medium] != choice):    
+    if(choice == nRange[medium]) or (high == low):
+      print(f'the choice is {choice}')     
+    elif(choice < nRange[medium]):
+      high = medium
+    elif(choice > nRange[medium]):
+      low = medium
+       
+    medium = int(round(medium)/2)
   
-  while(choice != medium):    
-    if(choice == medium):
-      return f"The choice is{choice}"
-    elif(choice < medium):
-       high = medium
-    elif(choice > medium):
-       low = medium
-
-    medium = round(medium /2)
-    end = time.time()  
-    
+  
+  
+  print(f'Not found')
+  end = time.time()  
   print(f"elapsed time: {end - start}")
-
 
 
 
@@ -46,8 +49,12 @@ choice = int(input("Type the number you want to find:"))
 
 input = input("type all the numbers you want include for search, separated by spaces:")
 
+numbers = [int(number) for number in input.split()]
+
+print(numbers)
+
 print("Regular search")
-regularsearch(input, choice)
+regularsearch(numbers, choice)
 
 print("Binary search")
-binarySearch(input, choice)
+binarySearch(numbers, choice)
